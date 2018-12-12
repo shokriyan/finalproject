@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.AssertJUnit;
+import org.testng.asserts.SoftAssert;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -41,12 +42,13 @@ public class LoginSteps {
 		WebElement password = driver.findElement(By.xpath("//input[@placeholder='Password']"));
 		password.clear();
 		password.sendKeys(pass);
-		Thread.sleep(3000);
+		
 
 	}
 
 	@When("^I click login button$")
 	public void i_click_login_button() throws Throwable {
+		Thread.sleep(1000);
 		WebElement btnLogin = driver.findElement(By.xpath("//input[@value='Login']"));
 		wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(btnLogin));
@@ -54,14 +56,13 @@ public class LoginSteps {
 
 	}
 
-	@Then("^I successfully logged in$")
-	public void i_successfully_logged_in() throws Throwable {
-		
-		driver.switchTo().frame(0);
-		Thread.sleep(1000);
-		driver.findElement(By.)
-		
-
+	@Then("^I successfully logged in as \"([^\"]*)\"$")
+	public void i_successfully_logged_in_as(String expecteUser) throws Throwable {
+		driver.switchTo().frame(1);
+		WebElement homebtn = driver.findElement(By.cssSelector(
+				"td.headertable table:nth-child(1) tbody:nth-child(1) tr:nth-child(1) > td.headertext:nth-child(1)"));
+		String getUser = homebtn.getText().substring(8);
+		Assert.assertEquals(getUser, expecteUser);
 
 	}
 

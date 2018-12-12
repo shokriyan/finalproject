@@ -5,7 +5,7 @@ Feature: LoginFeature
     And I navigate to the FreaCrm
     When I enter "mshokriyan" and "123456Ab"
     And I click login button
-    Then I successfully logged in
+    Then I successfully logged in as "Mohammad Shokriyan"
     And I Close browser
 
   Scenario: invalid login
