@@ -15,7 +15,7 @@ import cucumber.api.java.en.When;
 
 public class LoginSteps {
 	
-	WebDriver driver;
+	public static WebDriver driver;
 	WebDriverWait wait;
 
 	@Given("^I Open browser$")
@@ -32,15 +32,15 @@ public class LoginSteps {
 
 	}
 
-	@When("^I enter valid username and password$")
-	public void i_enter_valid_username_and_password() throws Throwable {
+	@When("^I enter \"([^\"]*)\" and \"([^\"]*)\"$")
+	public void i_enter_and(String uname, String pass) throws Throwable {
 		WebElement username = driver.findElement(By.xpath("//input[@placeholder='Username']"));
 		username.clear();
-		username.sendKeys("mshokriyan");
+		username.sendKeys(uname);
 		
 		WebElement password = driver.findElement(By.xpath("//input[@placeholder='Password']"));
 		password.clear();
-		password.sendKeys("123456Ab");
+		password.sendKeys(pass);
 		Thread.sleep(3000);
 
 	}
@@ -56,25 +56,13 @@ public class LoginSteps {
 
 	@Then("^I successfully logged in$")
 	public void i_successfully_logged_in() throws Throwable {
-		WebElement pageLogo = driver.findElement(By.xpath("//div[@class='noprint']/table/tbody/tr/td[1]"));
-		String logoText = pageLogo.getText();
 		
-		AssertJUnit.assertEquals("CRMPRO", logoText);
+		driver.switchTo().frame(0);
+		Thread.sleep(1000);
+		driver.findElement(By.)
 		
 
 
-	}
-	
-	@When("^I enter invalid username and password$")
-	public void i_enter_invalid_username_and_password() throws Throwable {
-		WebElement username = driver.findElement(By.xpath("//input[@placeholder='Username']"));
-		username.clear();
-		username.sendKeys(" ");
-		
-		WebElement password = driver.findElement(By.xpath("//input[@placeholder='Password']"));
-		password.clear();
-		password.sendKeys(" ");
-		Thread.sleep(3000);
 	}
 
 	@Then("^I should receive error massage$")
