@@ -6,7 +6,7 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features="src/test/resources/feature",glue={"stepdefinations"}, 
+@CucumberOptions(features="src/test/resources/feature",tags= {"@first"},glue={"stepdefinations"}, 
 dryRun = false, 
 plugin = {"html:test-output" }
 , monochrome = true
